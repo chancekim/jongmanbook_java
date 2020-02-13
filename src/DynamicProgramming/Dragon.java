@@ -14,11 +14,11 @@ public class Dragon {
             int start = Integer.parseInt(st.nextToken());
             int length = Integer.parseInt(st.nextToken());
 
-            System.out.println(getDrangonSubString(n, start, length));
+            System.out.println(getDrangonSubString(start, length));
         }
     }
 
-    private static String getDrangonSubString(int generation, int start, int length) {
+    private static String getDrangonSubString(int start, int length) {
         int quotient = start / 12;
         int remainder = start % 12;
 
