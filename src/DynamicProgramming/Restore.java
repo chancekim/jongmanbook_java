@@ -15,12 +15,32 @@ public class Restore {
 
         while (--cases >= 0) {
             int wordCnt = Integer.parseInt(sc.nextLine());
+            List<String> candidates = new ArrayList<>(wordCnt);
             words = new ArrayList<>(wordCnt);
             endFlag = 0;
 
             while (--wordCnt >= 0) {
-                words.add(sc.nextLine().trim());
-                endFlag = (endFlag << 1) | 0x1;
+                candidates.add(sc.nextLine().trim());
+            }
+
+            for (int i = 0; i < candidates.size(); i++) {
+                boolean isContained = false;
+                for (int j = 0; j < candidates.size(); j++) {
+                    if (i == j) continue;
+
+                    if (candidates.get(j).contains(candidates.get(i))) {
+                        isContained = true;
+                        break;
+                    }
+                }
+
+                if (!isContained) {
+                    words.add(candidates.get(i));
+                }
+            }
+
+            for (int i = 0; i < words.size(); i++) {
+                endFlag = endFlag | (0x1 << i);
             }
 
             cache = new String[endFlag + 1];
@@ -56,9 +76,6 @@ public class Restore {
     }
 
     private static String merge(String prefix, String postfix) {
-        if (prefix.contains(postfix)) return prefix;
-        if (postfix.contains(prefix)) return postfix;
-
         for (int i = 0; i < prefix.length(); i++) {
             if (postfix.startsWith(prefix.substring(i))) {
                 return prefix.substring(0, i) + postfix;
