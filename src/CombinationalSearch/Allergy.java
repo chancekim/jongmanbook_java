@@ -45,8 +45,6 @@ public class Allergy {
                 }
             }
 
-            Arrays.sort(friendPerFood, (integers, t1) -> -Integer.compare(integers.size(), t1.size()));
-
             long[] foodCanCover = new long[foodCnt];
 
             for (int i = 0; i < foodCnt; i++) {
